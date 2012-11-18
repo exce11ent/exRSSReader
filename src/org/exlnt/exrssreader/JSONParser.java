@@ -45,17 +45,22 @@ public class JSONParser {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+        	Log.e("Error trying to use httpClient", e.toString());
         }
+        Log.e("httpClient block done", "done");
  
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
+            Log.e("Reader created: ", "done");
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            is.close();
+            Log.e("Line created: ", sb.toString());
+           // is.close();
             json = sb.toString();
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());

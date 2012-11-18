@@ -27,9 +27,12 @@ public class JSONTracksParser {
 
 		JSONParser parser = new JSONParser();
 		JSONObject json = parser.getJSONFromUrl(reqURL);
-
+		JSONObject loved = null;
+		
 		try {
-			tracks = json.getJSONArray(TRACKS);
+			loved = json.getJSONObject("lovedtracks");
+			
+			tracks = loved.getJSONArray(TRACKS);
 
 			for (int i = 0; i < tracks.length(); i++) {
 				JSONObject track = tracks.getJSONObject(i);
@@ -52,7 +55,7 @@ public class JSONTracksParser {
 			e.printStackTrace();
 		}
 		
-		
+		System.err.append(trackList.toString());
 		return trackList;
 	}
 	
