@@ -6,5 +6,7 @@
     <string name="title_activity_main">Your RSS</string>
     <string name="rss_list">List of my favourite last.fm tracks</string>
     <string name="empty">List is empty. WTF?</string>
+    <string name="liked_icon_text">Show me what I like </string>
+    <string name="like">Like It!</string>
 
 </resources>

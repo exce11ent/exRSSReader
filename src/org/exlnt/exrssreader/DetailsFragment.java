@@ -2,15 +2,16 @@ package org.exlnt.exrssreader;
 
 import java.util.HashMap;
 
+import com.actionbarsherlock.app.SherlockFragment;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends SherlockFragment {
 	
 	HashMap<String, String> map = null;
 

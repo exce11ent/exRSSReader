@@ -1,9 +1,12 @@
 package org.exlnt.exrssreader;
 
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
-public class MainActivity extends FragmentActivity {
+import android.os.Bundle;
+
+public class MainActivity extends SherlockFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -11,6 +14,16 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
     }
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.activity_main, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+
+    
 
     
 }
