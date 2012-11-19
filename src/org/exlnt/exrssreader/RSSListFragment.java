@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class RSSListFragment extends ListFragment {
@@ -22,14 +24,13 @@ public class RSSListFragment extends ListFragment {
 	private Runnable viewTracks;
 	private ProgressDialog m_ProgressDialog = null; 
 	
-	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 	    super.onActivityCreated(savedInstanceState);
 	    trackList = new ArrayList<HashMap<String, String>>();
 	    
 	    viewTracks = new Runnable(){
-
+	    	
 			public void run() {
 				getFavoriteTracks();	
 			}
@@ -39,16 +40,19 @@ public class RSSListFragment extends ListFragment {
 	    thread.start();
 	    
         m_ProgressDialog = ProgressDialog.show(getActivity(),    
-                "Please wait...", "Retrieving data ...", true);
-        
-	   
-	    
-	    //mAdapter = new TrackListAdapter(getActivity(), R.id.songname, trackList);
-
-	   
-	    
-	    
+                "Please wait...", "Retrieving data ...", true);   
 	}
+	
+	@Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+		HashMap<String, String> map = trackList.get(position);
+		
+		Intent intent = new Intent(getActivity(), DetailsActivity.class);
+		intent.putExtra("lovedTrack", map);
+		startActivity(intent);
+    }
+	
+	
 	
 	private void getFavoriteTracks(){
 		try {
@@ -70,14 +74,6 @@ public class RSSListFragment extends ListFragment {
 	private Runnable returnRes = new Runnable() {
 
 		public void run() {
-/*			if(trackList != null && trackList.size() > 0){
-				mAdapter.notifyDataSetChanged();
-				for(int i = 0; i < trackList.size(); i++) {
-					sAdapter.add(trackList.get(i));
-				}
-		           m_ProgressDialog.dismiss();
-		           mAdapter.notifyDataSetChanged();
-			}*/
 		    mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
 		    setListAdapter(mAdapter);
 			m_ProgressDialog.dismiss();
@@ -88,6 +84,7 @@ public class RSSListFragment extends ListFragment {
 		
 	};
 	
+
 	private class TrackListAdapter extends ArrayAdapter<HashMap<String, String>> {
 		
 		private ArrayList<HashMap<String, String>> items = null;

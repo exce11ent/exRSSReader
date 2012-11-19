@@ -11,7 +11,8 @@ import android.util.Log;
 
 public class JSONTracksParser {
 
-	private static String reqURL = "http://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=sxe_deathcore&api_key=6d7403baf4120f299266f1fa0da3f2ef&format=json";
+	private static String reqURL = 
+			"http://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=sxe_deathcore&api_key=6d7403baf4120f299266f1fa0da3f2ef&format=json";
 
 	private static final String TRACKS = "track";
 	private static final String TRACK_NAME = "name";
