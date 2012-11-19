@@ -964,20 +964,20 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
-        public static final int artname=0x7f040035;
+        public static final int artname=0x7f040034;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
-        public static final int list_element=0x7f040034;
-        public static final int list_view_fragment=0x7f040033;
+        public static final int list_element=0x7f040033;
+        public static final int list_view_fragment=0x7f040037;
         public static final int menu_settings=0x7f040038;
         public static final int normal=0x7f040001;
-        public static final int rss_full_fragment=0x7f040037;
+        public static final int rss_full_fragment=0x7f040036;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
-        public static final int songname=0x7f040036;
+        public static final int songname=0x7f040035;
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
@@ -1011,10 +1011,12 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030016;
         public static final int activity_main=0x7f030017;
         public static final int list_element=0x7f030018;
-        public static final int rssfullfragment=0x7f030019;
-        public static final int rsslistfragment=0x7f03001a;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
-        public static final int sherlock_spinner_item=0x7f03001c;
+        public static final int mylistelement=0x7f030019;
+        public static final int rssfullfragment=0x7f03001a;
+        public static final int rsslistfrag=0x7f03001b;
+        public static final int rsslistfragment=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
     }
     public static final class menu {
         public static final int activity_main=0x7f0b0000;
@@ -1066,8 +1068,10 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
         public static final int app_name=0x7f09000f;
+        public static final int empty=0x7f090014;
         public static final int hello_world=0x7f090010;
         public static final int menu_settings=0x7f090011;
+        public static final int rss_list=0x7f090013;
         public static final int title_activity_main=0x7f090012;
     }
     public static final class style {

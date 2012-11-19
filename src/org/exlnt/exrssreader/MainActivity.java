@@ -11,16 +11,12 @@ public class MainActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+/*        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         RSSListFragment myFragment = new RSSListFragment();
         ft.add(R.id.list_view_fragment, myFragment);
-        ft.commit();
+        ft.commit();*/
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
 
     
 }

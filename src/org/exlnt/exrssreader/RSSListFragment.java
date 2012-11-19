@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,9 @@ public class RSSListFragment extends ListFragment {
 	
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
 	    trackList = new ArrayList<HashMap<String, String>>();
-	    mAdapter = new TrackListAdapter(getActivity(), R.layout.list_element, trackList);
-	    setListAdapter(mAdapter);
 	    
 	    viewTracks = new Runnable(){
 
@@ -38,8 +37,16 @@ public class RSSListFragment extends ListFragment {
 	    
 	    Thread thread = new Thread(null, viewTracks, "Background");
 	    thread.start();
+	    
         m_ProgressDialog = ProgressDialog.show(getActivity(),    
                 "Please wait...", "Retrieving data ...", true);
+        
+	   
+	    
+	    //mAdapter = new TrackListAdapter(getActivity(), R.id.songname, trackList);
+
+	   
+	    
 	    
 	}
 	
@@ -49,27 +56,33 @@ public class RSSListFragment extends ListFragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		getActivity().runOnUiThread(returnRes);
+		Log.e("TRACK LIST: ", trackList.toString());
+        getActivity().runOnUiThread(returnRes);
 	}
 	
 
-/*	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View myListFragmentView = inflater.inflate(R.id.list_view_fragment, container, false);
-		return myListFragmentView;
-	}*/
+		
+		return inflater.inflate(R.layout.rsslistfrag, null);
+	}
 
 	private Runnable returnRes = new Runnable() {
 
 		public void run() {
-			if(trackList != null && trackList.size() > 0){
+/*			if(trackList != null && trackList.size() > 0){
 				mAdapter.notifyDataSetChanged();
 				for(int i = 0; i < trackList.size(); i++) {
-					mAdapter.add(trackList.get(i));
+					sAdapter.add(trackList.get(i));
 				}
 		           m_ProgressDialog.dismiss();
 		           mAdapter.notifyDataSetChanged();
-			}
+			}*/
+		    mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
+		    setListAdapter(mAdapter);
+			m_ProgressDialog.dismiss();
+	        mAdapter.notifyDataSetChanged();
+	        
 			
 		}
 		
@@ -88,17 +101,19 @@ public class RSSListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;
-			LayoutInflater li = getActivity().getLayoutInflater();
-			view = li.inflate(R.layout.list_element, null);
+			if (view == null) {
+				LayoutInflater li = getActivity().getLayoutInflater();
+				view = li.inflate(R.layout.mylistelement, null);
+			}
 			HashMap<String, String> map = items.get(position);
 			if (map != null){
-				TextView artist = (TextView) view.findViewById(R.id.artname);
-				TextView song = (TextView) view.findViewById(R.id.songname);
+				TextView artist = (TextView) view.findViewWithTag("artistName");
+				TextView song = (TextView) view.findViewWithTag("trackName");
 				if (artist != null) {
 					artist.setText(map.get("artistName"));
 				}
 				if (song != null) {
-					song.setText(map.get("songName"));
+					song.setText(map.get("trackName"));
 				}
 			}
 			return view;
