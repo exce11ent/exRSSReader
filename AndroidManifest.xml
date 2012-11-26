@@ -28,6 +28,10 @@
             android:label="Details">
         </activity>
         
+        <provider 
+            android:authorities="org.exlnt.exrssreader.data.LikedTracksProvider"
+            android:name="org.exlnt.exrssreader.data.LikedTracksProvider"
+            android:exported="false"></provider>
     </application>
 
 </manifest>

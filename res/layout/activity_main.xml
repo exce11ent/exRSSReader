@@ -2,11 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-	<fragment 
-	    android:name="org.exlnt.exrssreader.RSSListFragment"
-	    android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/feedlist"/>
+    
+        <FrameLayout
+            android:id="@+id/main_fragment_place"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" />
 
 </RelativeLayout>

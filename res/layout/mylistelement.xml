@@ -8,10 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="artistName"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:id="@+id/artist_name"/>
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="trackName"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:id="@+id/track_name"/>
 </LinearLayout>
