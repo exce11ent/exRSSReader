@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ public class RSSListFragment extends SherlockListFragment {
 	
 	private ArrayList<HashMap<String, String>> trackList = null;
 	private TrackListAdapter mAdapter;
-	private Runnable viewTracks;
+//	private Runnable viewTracks;
 	private ProgressDialog m_ProgressDialog = null; 
 	
 	@Override
@@ -30,7 +31,7 @@ public class RSSListFragment extends SherlockListFragment {
 	    super.onActivityCreated(savedInstanceState);
 	    trackList = new ArrayList<HashMap<String, String>>();
 	    
-	    viewTracks = new Runnable(){
+/*	    viewTracks = new Runnable(){
 	    	
 			public void run() {
 				getFavoriteTracks();	
@@ -38,12 +39,24 @@ public class RSSListFragment extends SherlockListFragment {
 	    };
 	    
 	    Thread thread = new Thread(null, viewTracks, "Background");
-	    thread.start();
+	    thread.start();*/
 	    
-        m_ProgressDialog = ProgressDialog.show(getActivity(),    
-                "Please wait...", "Retrieving data ...", true);   
 	}
 	
+	
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		DataDownloadTask task = new DataDownloadTask();
+		task.execute();
+	}
+
+
+
 	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 		HashMap<String, String> map = trackList.get(position);
@@ -62,7 +75,7 @@ public class RSSListFragment extends SherlockListFragment {
 			e.printStackTrace();
 		}
 		Log.e("TRACK LIST: ", trackList.toString());
-        getActivity().runOnUiThread(returnRes);
+/*        getActivity().runOnUiThread(returnRes);*/
 	}
 	
 
@@ -72,18 +85,13 @@ public class RSSListFragment extends SherlockListFragment {
 		return inflater.inflate(R.layout.rsslistfrag, null);
 	}
 
-	private Runnable returnRes = new Runnable() {
+/*	private Runnable returnRes = new Runnable() {
 
 		public void run() {
-		    mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
-		    setListAdapter(mAdapter);
-			m_ProgressDialog.dismiss();
-	        mAdapter.notifyDataSetChanged();
-	        
-			
+		   		
 		}
 		
-	};
+	};*/
 	
 
 	private class TrackListAdapter extends ArrayAdapter<HashMap<String, String>> {
@@ -117,7 +125,33 @@ public class RSSListFragment extends SherlockListFragment {
 			return view;
 		}
 		
+	}	
+	
+	private class DataDownloadTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			getFavoriteTracks();
+			return null;
+		}
+
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			 mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
+			    setListAdapter(mAdapter);
+				m_ProgressDialog.dismiss();
+		        mAdapter.notifyDataSetChanged();	
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			m_ProgressDialog = ProgressDialog.show(getActivity(),    
+	                "Please wait...", "Retrieving data ...", true);   
+		}
 		
-		
-	} 
+	}
 }
