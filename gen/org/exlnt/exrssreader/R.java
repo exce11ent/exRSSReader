@@ -965,7 +965,7 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
-        public static final int artname=0x7f04003a;
+        public static final int artist_name=0x7f040039;
         public static final int details=0x7f040033;
         public static final int details_artist_name=0x7f040035;
         public static final int details_artist_url=0x7f040037;
@@ -973,21 +973,17 @@ containing a value of this type.
         public static final int details_track_url=0x7f040038;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
-        public static final int feedlist=0x7f040034;
         public static final int homeAsUp=0x7f040006;
-        public static final int like=0x7f040040;
+        public static final int like=0x7f04003c;
         public static final int listMode=0x7f040002;
-        public static final int list_element=0x7f040039;
-        public static final int list_view_fragment=0x7f04003e;
-        public static final int my_fragment=0x7f04003c;
+        public static final int main_fragment_place=0x7f040034;
         public static final int normal=0x7f040001;
-        public static final int rss_full_fragment=0x7f04003d;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
-        public static final int show_liked=0x7f04003f;
-        public static final int songname=0x7f04003b;
+        public static final int show_liked=0x7f04003b;
         public static final int tabMode=0x7f040003;
+        public static final int track_name=0x7f04003a;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
@@ -1021,14 +1017,11 @@ containing a value of this type.
         public static final int activity_details=0x7f030017;
         public static final int activity_main=0x7f030018;
         public static final int fragment_details=0x7f030019;
-        public static final int list_element=0x7f03001a;
-        public static final int myfragment=0x7f03001b;
-        public static final int mylistelement=0x7f03001c;
-        public static final int rssfullfragment=0x7f03001d;
-        public static final int rsslistfrag=0x7f03001e;
-        public static final int rsslistfragment=0x7f03001f;
-        public static final int sherlock_spinner_dropdown_item=0x7f030020;
-        public static final int sherlock_spinner_item=0x7f030021;
+        public static final int liked_list_fragment=0x7f03001a;
+        public static final int mylistelement=0x7f03001b;
+        public static final int rsslistfrag=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
     }
     public static final class menu {
         public static final int activity_main=0x7f0b0000;

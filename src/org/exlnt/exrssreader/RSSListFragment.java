@@ -10,13 +10,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+/*
+ * This fragment class manages gathering and displaying necessary data
+ * it loads data in a separate thread
+ */
 
 public class RSSListFragment extends SherlockListFragment {
 	
@@ -30,8 +34,7 @@ public class RSSListFragment extends SherlockListFragment {
 	    super.onActivityCreated(savedInstanceState);
 	    trackList = new ArrayList<HashMap<String, String>>();
 	    
-	    viewTracks = new Runnable(){
-	    	
+	    viewTracks = new Runnable(){  	
 			public void run() {
 				getFavoriteTracks();	
 			}
@@ -44,6 +47,25 @@ public class RSSListFragment extends SherlockListFragment {
                 "Please wait...", "Retrieving data ...", true);   
 	}
 	
+	private void getFavoriteTracks(){
+		try {
+			trackList = new JSONTracksParser().getTracks();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        getActivity().runOnUiThread(returnRes);
+	}
+	
+	private Runnable returnRes = new Runnable() {
+
+		public void run() {
+		    mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
+		    setListAdapter(mAdapter);
+			m_ProgressDialog.dismiss();
+	        mAdapter.notifyDataSetChanged();		
+		}
+	};
+	
 	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 		HashMap<String, String> map = trackList.get(position);
@@ -53,38 +75,11 @@ public class RSSListFragment extends SherlockListFragment {
 		startActivity(intent);
     }
 	
-	
-	
-	private void getFavoriteTracks(){
-		try {
-			trackList = new JSONTracksParser().getTracks();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Log.e("TRACK LIST: ", trackList.toString());
-        getActivity().runOnUiThread(returnRes);
-	}
-	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
+			Bundle savedInstanceState) {	
 		return inflater.inflate(R.layout.rsslistfrag, null);
 	}
-
-	private Runnable returnRes = new Runnable() {
-
-		public void run() {
-		    mAdapter = new TrackListAdapter(getActivity(), R.layout.mylistelement, trackList);
-		    setListAdapter(mAdapter);
-			m_ProgressDialog.dismiss();
-	        mAdapter.notifyDataSetChanged();
-	        
-			
-		}
-		
-	};
-	
 
 	private class TrackListAdapter extends ArrayAdapter<HashMap<String, String>> {
 		
@@ -115,9 +110,6 @@ public class RSSListFragment extends SherlockListFragment {
 				}
 			}
 			return view;
-		}
-		
-		
-		
+		}	
 	} 
 }

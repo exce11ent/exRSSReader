@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class JSONTracksParser {
 
 	private static String reqURL = 
@@ -22,6 +20,9 @@ public class JSONTracksParser {
 	private static final String ARTIST_INFO_URL = "url";
 
 
+	/**
+	 * This method extracts necessary data from JSON response
+	 */
 	public ArrayList<HashMap<String, String>> getTracks() {
 		
 		JSONArray tracks = null;
@@ -57,8 +58,6 @@ public class JSONTracksParser {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		Log.e("DATA EXTRACTION SUCC.", trackList.toString());
 		return trackList;
 	}
 	
